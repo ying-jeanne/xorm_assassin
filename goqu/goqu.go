@@ -10,8 +10,6 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 )
 
-const file string = "grafana.db"
-
 type Team struct {
 	ID        int       `db:"id" goqu:"skipinsert"`
 	Name      string    `db:"name"`
@@ -62,7 +60,7 @@ func deleteTeam(db *goqu.Database, name string) error {
 	return err
 }
 
-func InitLib() *goqu.Database {
+func InitLib(file string) *goqu.Database {
 	// create a sql.DB sqlite3 driver
 	sqldb, err := sql.Open("sqlite3", file)
 	if err != nil {

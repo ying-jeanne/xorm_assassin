@@ -1,0 +1,17 @@
+goos: darwin
+goarch: amd64
+pkg: github.com/ying-jeanne/xorm_assassin
+cpu: Intel(R) Core(TM) i5-1038NG7 CPU @ 2.00GHz
+BenchmarkGoquDBExecution
+BenchmarkGoquDBExecution-8   	   10000	   2506259 ns/op	   29312 B/op	     569 allocs/op
+BenchmarkGoquDBExecution-8   	   10000	   2481322 ns/op	   29312 B/op	     569 allocs/op
+BenchmarkGoquDBExecution-8   	   10000	   2498425 ns/op	   29312 B/op	     569 allocs/op
+BenchmarkGoquDBExecution-8   	   10000	   2599124 ns/op	   29312 B/op	     569 allocs/op
+BenchmarkGoquDBExecution-8   	   10000	   2593422 ns/op	   29312 B/op	     569 allocs/op
+BenchmarkGoquDBExecution-8   	   10000	   2471810 ns/op	   29312 B/op	     569 allocs/op
+BenchmarkGoquDBExecution-8   	   10000	   2540942 ns/op	   29312 B/op	     569 allocs/op
+BenchmarkGoquDBExecution-8   	   10000	   2491191 ns/op	   29312 B/op	     569 allocs/op
+BenchmarkGoquDBExecution-8   	   10000	   2561725 ns/op	   29312 B/op	     569 allocs/op
+BenchmarkGoquDBExecution-8   	   10000	   2298241 ns/op	   29312 B/op	     569 allocs/op
+PASS
+ok  	github.com/ying-jeanne/xorm_assassin	250.674s

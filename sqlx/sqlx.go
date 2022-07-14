@@ -10,8 +10,6 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 )
 
-const file string = "grafana.db"
-
 type Team struct {
 	ID        int
 	Name      string         `db:"name"`
@@ -78,7 +76,7 @@ func deleteTeam(db *sqlx.DB, name string) error {
 	// return 0, err
 }
 
-func InitLib() *sqlx.DB {
+func InitLib(file string) *sqlx.DB {
 	// set engine of sqlite3 here
 	db, err := sqlx.Connect("sqlite3", file)
 	if err != nil {

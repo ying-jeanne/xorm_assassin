@@ -10,8 +10,6 @@ import (
 	"xorm.io/xorm/names"
 )
 
-const file string = "grafana.db"
-
 type Team struct {
 	ID        int       `xorm:"'id' pk autoincr"`
 	Name      string    `xorm:"name"`
@@ -44,7 +42,7 @@ func deleteTeam(e *xorm.Engine, name string) error {
 	return err
 }
 
-func InitLib() *xorm.Engine {
+func InitLib(file string) *xorm.Engine {
 	// set engine of sqlite3 here
 	engine, err := xorm.NewEngine("sqlite3", file)
 	if err != nil {
