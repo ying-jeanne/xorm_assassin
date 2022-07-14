@@ -8,6 +8,7 @@ document: http://www.inanzzz.com/index.php/post/yz8n/using-golang-bench-benchsta
 
 ## xorm & goqu
 benchstat xorm.txt goqu.txt
+
 name           old time/op    new time/op    delta
 DBExecution-8    2.39ms ± 3%    2.53ms ± 3%   +5.59%  (p=0.000 n=9+9)
 
@@ -19,6 +20,7 @@ DBExecution-8       810 ± 0%       569 ± 0%  -29.75%  (p=0.000 n=10+10)
 
 ## xorm & sqlx
 benchstat xorm.txt sqlx.txt
+
 name           old time/op    new time/op    delta
 DBExecution-8    2.39ms ± 3%    2.42ms ± 3%     ~     (p=0.297 n=9+9)
 
