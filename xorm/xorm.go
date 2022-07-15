@@ -69,6 +69,23 @@ func Create_team_table_postgres(db *xorm.Engine) {
 	}
 }
 
+func Create_team_table_sqlite(db *xorm.Engine) {
+	schema := `
+		DROP TABLE IF EXISTS "team";
+		CREATE TABLE "team" (
+			"id" INTEGER PRIMARY KEY AUTOINCREMENT,
+			"name" TEXT NOT NULL,
+			"org_id" BIGINT NOT NULL,
+			"created" TIMESTAMP NOT NULL,
+			"updated" TIMESTAMP NOT NULL,
+			"email" TEXT
+		);
+	`
+	if _, err := db.Exec(schema); err != nil {
+		panic(err)
+	}
+}
+
 func Create_team_table_mysql(db *xorm.Engine) {
 	dropTable := "DROP TABLE IF EXISTS `team`;"
 	createTable := "CREATE  TABLE `team` (" +

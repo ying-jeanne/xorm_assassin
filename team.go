@@ -9,8 +9,6 @@ import (
 	"xorm.io/xorm"
 )
 
-const file string = "grafana.db"
-
 func team_service_xorm(i int, db *xorm.Engine) {
 	xorm_example.Senario(i, db)
 }

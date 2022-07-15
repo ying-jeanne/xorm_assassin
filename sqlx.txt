@@ -3,15 +3,15 @@ goarch: amd64
 pkg: github.com/ying-jeanne/xorm_assassin
 cpu: Intel(R) Core(TM) i5-1038NG7 CPU @ 2.00GHz
 BenchmarkDBExecution
-BenchmarkDBExecution-8   	   10000	   2356085 ns/op	    8896 B/op	     316 allocs/op
-BenchmarkDBExecution-8   	   10000	   2483637 ns/op	    8896 B/op	     316 allocs/op
-BenchmarkDBExecution-8   	   10000	   2391124 ns/op	    8896 B/op	     316 allocs/op
-BenchmarkDBExecution-8   	   10000	   2392225 ns/op	    8896 B/op	     316 allocs/op
-BenchmarkDBExecution-8   	   10000	   2382589 ns/op	    8896 B/op	     316 allocs/op
-BenchmarkDBExecution-8   	   10000	   2446684 ns/op	    8896 B/op	     316 allocs/op
-BenchmarkDBExecution-8   	   10000	   2429190 ns/op	    8896 B/op	     316 allocs/op
-BenchmarkDBExecution-8   	   10000	   2602626 ns/op	    8896 B/op	     316 allocs/op
-BenchmarkDBExecution-8   	   10000	   2465653 ns/op	    8896 B/op	     316 allocs/op
-BenchmarkDBExecution-8   	   10000	   2462656 ns/op	    8896 B/op	     316 allocs/op
+BenchmarkDBExecution-8   	   10000	     85729 ns/op	    8960 B/op	     316 allocs/op
+BenchmarkDBExecution-8   	   10000	     92502 ns/op	    8959 B/op	     316 allocs/op
+BenchmarkDBExecution-8   	   10000	    102669 ns/op	    8959 B/op	     316 allocs/op
+BenchmarkDBExecution-8   	   10000	     98044 ns/op	    8959 B/op	     316 allocs/op
+BenchmarkDBExecution-8   	   10000	     92656 ns/op	    8959 B/op	     316 allocs/op
+BenchmarkDBExecution-8   	   10000	     86235 ns/op	    8959 B/op	     316 allocs/op
+BenchmarkDBExecution-8   	   10000	     87219 ns/op	    8959 B/op	     316 allocs/op
+BenchmarkDBExecution-8   	   10000	     84312 ns/op	    8959 B/op	     316 allocs/op
+BenchmarkDBExecution-8   	   10000	     91787 ns/op	    8959 B/op	     316 allocs/op
+BenchmarkDBExecution-8   	   10000	    107722 ns/op	    8959 B/op	     316 allocs/op
 PASS
-ok  	github.com/ying-jeanne/xorm_assassin	244.370s
+ok  	github.com/ying-jeanne/xorm_assassin	9.465s

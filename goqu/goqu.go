@@ -2,7 +2,6 @@ package goqu_example
 
 import (
 	"database/sql"
-	"fmt"
 	"log"
 	"strconv"
 	"time"
@@ -30,7 +29,7 @@ func insertTeam(db *goqu.Database, team Team) error {
 	// used, we would endup with teamId = 0 hmmmm it makes me feel the same as xorm, convinient but with a lot of mistery default
 	// behavior
 	qry := db.Insert("team").Rows(team)
-	fmt.Println(qry.ToSQL())
+	// fmt.Println(qry.ToSQL())
 	_, err := qry.Executor().Exec()
 	return err
 }
@@ -79,6 +78,23 @@ func InitLib(driver, connstr string) *goqu.Database {
 	// It is really easy to create a goqu database based on sql.DB, create a db from the sql.DB object
 	db := dialect.DB(sqldb)
 	return db
+}
+
+func Create_team_table_sqlite(db *goqu.Database) {
+	schema := `
+		DROP TABLE IF EXISTS "team";
+		CREATE TABLE "team" (
+			"id" INTEGER PRIMARY KEY AUTOINCREMENT,
+			"name" TEXT NOT NULL,
+			"org_id" BIGINT NOT NULL,
+			"created" TIMESTAMP NOT NULL,
+			"updated" TIMESTAMP NOT NULL,
+			"email" TEXT
+		);
+	`
+	if _, err := db.Exec(schema); err != nil {
+		panic(err)
+	}
 }
 
 func Create_team_table_postgres(db *goqu.Database) {

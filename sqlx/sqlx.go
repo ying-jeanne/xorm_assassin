@@ -19,6 +19,7 @@ type Team struct {
 	Email     sql.NullString `db:"email"`
 }
 
+// The raw query we are using are actually oracle mysql query syntax
 func insertTeam(db *sqlx.DB, team Team) error {
 	// this is a transaction, a transaction should start with MustBegin, then end by commit
 	// Inside of grafana code, instead of put session into the context, we can put the transaction into the context
@@ -83,6 +84,23 @@ func InitLib(driver, file string) *sqlx.DB {
 		log.Fatal(err)
 	}
 	return db
+}
+
+func Create_team_table_sqlite(db *sqlx.DB) {
+	schema := `
+		DROP TABLE IF EXISTS "team";
+		CREATE TABLE "team" (
+			"id" INTEGER PRIMARY KEY AUTOINCREMENT,
+			"name" TEXT NOT NULL,
+			"org_id" BIGINT NOT NULL,
+			"created" TIMESTAMP NOT NULL,
+			"updated" TIMESTAMP NOT NULL,
+			"email" TEXT
+		);
+	`
+	if _, err := db.Exec(schema); err != nil {
+		panic(err)
+	}
 }
 
 func Create_team_table_postgres(db *sqlx.DB) {
