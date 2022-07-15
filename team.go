@@ -1,7 +1,7 @@
 package team
 
 import (
-	"github.com/doug-martin/goqu"
+	"github.com/doug-martin/goqu/v9"
 	"github.com/jmoiron/sqlx"
 	goqu_example "github.com/ying-jeanne/xorm_assassin/goqu"
 	sqlx_example "github.com/ying-jeanne/xorm_assassin/sqlx"

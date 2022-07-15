@@ -48,7 +48,7 @@ func getTeam(db *sqlx.DB, name string) (bool, Team, error) {
 	// get one single result
 	team1 := Team{}
 	found := true
-	err := db.Get(&team1, "SELECT * FROM team WHERE Name=$1", name)
+	err := db.Get(&team1, db.Rebind("SELECT * FROM team WHERE name=?"), name)
 	if err == sql.ErrNoRows {
 		found = false
 		err = nil
@@ -64,7 +64,7 @@ func updateTeam(db *sqlx.DB, team Team) error {
 
 func deleteTeam(db *sqlx.DB, name string) error {
 	// the db.Rebind is to translate the ? to different presentation in different database type
-	_, err := db.Exec("DELETE FROM team WHERE name=?", name)
+	_, err := db.Exec(db.Rebind("DELETE FROM team WHERE name=?"), name)
 	return err
 	// if err != nil {
 	// return 0, err
@@ -76,13 +76,49 @@ func deleteTeam(db *sqlx.DB, name string) error {
 	// return 0, err
 }
 
-func InitLib(file string) *sqlx.DB {
+func InitLib(driver, file string) *sqlx.DB {
 	// set engine of sqlite3 here
-	db, err := sqlx.Connect("sqlite3", file)
+	db, err := sqlx.Connect(driver, file)
 	if err != nil {
 		log.Fatal(err)
 	}
 	return db
+}
+
+func Create_team_table_postgres(db *sqlx.DB) {
+	schema := `
+		DROP TABLE IF EXISTS "team";
+		CREATE TABLE "team" (
+			"id" SERIAL PRIMARY KEY NOT NULL,
+			"name" VARCHAR(190) NOT NULL,
+			"org_id" BIGINT NOT NULL,
+			"created" TIMESTAMP NOT NULL DEFAULT now(),
+			"updated" TIMESTAMP NOT NULL DEFAULT now(),
+			"email" VARCHAR(190)
+		);
+	`
+	if _, err := db.Exec(schema); err != nil {
+		panic(err)
+	}
+}
+
+func Create_team_table_mysql(db *sqlx.DB) {
+	dropTable := "DROP TABLE IF EXISTS `team`;"
+	createTable := "CREATE  TABLE `team` (" +
+		"`id` INT NOT NULL AUTO_INCREMENT ," +
+		"`name` VARCHAR(190) NOT NULL," +
+		"`org_id` BIGINT NOT NULL ," +
+		"`created` DATETIME NOT NULL ," +
+		"`updated` DATETIME NOT NULL ," +
+		"`email` VARCHAR(190)," +
+		"PRIMARY KEY (`id`) );"
+
+	if _, err := db.Exec(dropTable); err != nil {
+		panic(err)
+	}
+	if _, err := db.Exec(createTable); err != nil {
+		panic(err)
+	}
 }
 
 func Senario(i int, db *sqlx.DB) {

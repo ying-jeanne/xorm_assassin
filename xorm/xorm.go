@@ -38,18 +38,54 @@ func updateTeam(e *xorm.Engine, team Team) error {
 }
 
 func deleteTeam(e *xorm.Engine, name string) error {
-	_, err := e.Exec("DELETE FROM team WHERE name=? Returning id", name)
+	_, err := e.Exec("DELETE FROM team WHERE name=?", name)
 	return err
 }
 
-func InitLib(file string) *xorm.Engine {
+func InitLib(driver, file string) *xorm.Engine {
 	// set engine of sqlite3 here
-	engine, err := xorm.NewEngine("sqlite3", file)
+	engine, err := xorm.NewEngine(driver, file)
 	if err != nil {
 		log.Fatal(err)
 	}
 	engine.SetTableMapper(names.GonicMapper{})
 	return engine
+}
+
+func Create_team_table_postgres(db *xorm.Engine) {
+	schema := `
+		DROP TABLE IF EXISTS "team";
+		CREATE TABLE "team" (
+			"id" SERIAL PRIMARY KEY NOT NULL,
+			"name" VARCHAR(190) NOT NULL,
+			"org_id" BIGINT NOT NULL,
+			"created" TIMESTAMP NOT NULL DEFAULT now(),
+			"updated" TIMESTAMP NOT NULL DEFAULT now(),
+			"email" VARCHAR(190)
+		);
+	`
+	if _, err := db.Exec(schema); err != nil {
+		panic(err)
+	}
+}
+
+func Create_team_table_mysql(db *xorm.Engine) {
+	dropTable := "DROP TABLE IF EXISTS `team`;"
+	createTable := "CREATE  TABLE `team` (" +
+		"`id` INT NOT NULL AUTO_INCREMENT ," +
+		"`name` VARCHAR(190) NOT NULL," +
+		"`org_id` BIGINT NOT NULL ," +
+		"`created` DATETIME NOT NULL ," +
+		"`updated` DATETIME NOT NULL ," +
+		"`email` VARCHAR(190)," +
+		"PRIMARY KEY (`id`) );"
+
+	if _, err := db.Exec(dropTable); err != nil {
+		panic(err)
+	}
+	if _, err := db.Exec(createTable); err != nil {
+		panic(err)
+	}
 }
 
 func Senario(i int, engine *xorm.Engine) {
